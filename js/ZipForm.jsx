@@ -1,6 +1,5 @@
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group')
 const React = require('react')
-const ReactDOM = require('react-dom')
 const _ = require('lodash')
 const agent = require('superagent')
 const API_PATH = 'https://db-zip-api.herokuapp.com/api/zip-code/'
@@ -110,7 +109,7 @@ const App = React.createClass({
     } else {
       containerContents = (
         <div>
-          <h1 className='title'>Thanks for submitting your info!!</h1>
+          <h1 className='title'>Thanks!!</h1>
           <button className='submit' onClick={this.handleResubmit}>Resubmit</button>
         </div>
       )
@@ -127,4 +126,4 @@ const App = React.createClass({
 
 })
 
-ReactDOM.render(<App />, document.getElementById('app'))
+module.exports = App

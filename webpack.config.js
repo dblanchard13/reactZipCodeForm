@@ -2,24 +2,30 @@ const path = require('path')
 
 module.exports = {
   context: __dirname,
-  entry: './js/ZipForm.jsx',
+
+  entry: './js/BrowserEntry.jsx',
+
   output: {
     path: path.join(__dirname, '/public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/public/'
   },
+
   resolve: {
     extensions: ['', '.js', '.jsx', '.json']
   },
+
   stats: {
     colors: true,
     reasons: true,
-    chunks: false
+    chunks: true
   },
+
   module: {
     preLoaders: [
       {
         test: /\.jsx?$/,
-        loader: "eslint-loader",
+        loader: 'eslint-loader',
         exclude: /node_modules/
       }
     ],
@@ -27,6 +33,10 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   }
