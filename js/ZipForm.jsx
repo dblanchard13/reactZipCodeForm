@@ -55,7 +55,7 @@ const App = React.createClass({
     agent
       .get(`${API_PATH}${zipCode}`)
       .end((err, res) => {
-        if (err) return
+        if (err) return console.error(`Error in request to zip code db: ${err.message}`)
 
         if (res.body) {
           const {state, city} = res.body
@@ -68,17 +68,35 @@ const App = React.createClass({
   },
 
   componentWillMount () {
-    this.lookupZipCode = _.debounce(this.lookupZipCode, 750, {leading: false, trailing: true})
+    const opts = {leading: false, trailing: true}
+    this.lookupZipCode = _.debounce(this.lookupZipCode, 750, opts)
   },
 
   render () {
     let cityAndState, containerContents
 
     if (this.state.zipLookupComplete) {
+
       cityAndState = (
+
         <div>
-          <input className='half-line-item float-left' type='text' placeholder='City' value={this.state.city} onChange={this.handleCityEvent} />
-          <input className='half-line-item float-right' type='text' placeholder='State' value={this.state.state} onChange={this.handleStateEvent} />
+
+          <input
+            className='half-line-item float-left'
+            type='text'
+            placeholder='City'
+            value={this.state.city}
+            onChange={this.handleCityEvent}
+          />
+
+          <input
+            className='half-line-item float-right'
+            type='text'
+            placeholder='State'
+            value={this.state.state}
+            onChange={this.handleStateEvent}
+          />
+
         </div>
       )
     }
@@ -86,17 +104,48 @@ const App = React.createClass({
     if (this.state.showForm) {
       containerContents = (
         <form onSubmit={this.handleFormSubmit}>
-          <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={750} transitionLeaveTimeout={750}>
+          <ReactCSSTransitionGroup
+            transitionName="example"
+            transitionEnterTimeout={750}
+            transitionLeaveTimeout={750}
+          >
 
             <h1 className='title'>Zip Form</h1>
 
-            <input className='line-item' type='text' placeholder='Full name' value={this.state.fullName} onChange={this.handleNameEvent} />
-            <input className='line-item' type='text' placeholder='Address line 1' value={this.state.addressLine1} onChange={this.handleAddress1Event} />
-            <input className='line-item' type='text' placeholder='Address line 2' value={this.state.addressLine2} onChange={this.handleAddress2Event} />
+            <input
+              className='line-item'
+              type='text'
+              placeholder='Full name'
+              value={this.state.fullName}
+              onChange={this.handleNameEvent}
+            />
+
+            <input
+              className='line-item'
+              type='text'
+              placeholder='Address line 1'
+              value={this.state.addressLine1}
+              onChange={this.handleAddress1Event}
+            />
+
+            <input
+              className='line-item'
+              type='text'
+              placeholder='Address line 2'
+              value={this.state.addressLine2}
+              onChange={this.handleAddress2Event}
+            />
+
 
             {cityAndState}
 
-            <input className='half-line-item float-left' type='text' placeholder='Zip Code' value={this.state.zipCode} onChange={this.handleZipCodeEvent} />
+            <input
+              className='half-line-item float-left'
+              type='text'
+              placeholder='Zip Code'
+              value={this.state.zipCode}
+              onChange={this.handleZipCodeEvent}
+            />
 
             <br />
             <br />
@@ -107,12 +156,14 @@ const App = React.createClass({
         </form>
       )
     } else {
+
       containerContents = (
         <div>
           <h1 className='title'>Thanks!!</h1>
           <button className='submit' onClick={this.handleResubmit}>Resubmit</button>
         </div>
       )
+
     }
 
     return (
