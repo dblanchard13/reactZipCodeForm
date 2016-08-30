@@ -6,7 +6,9 @@
   "scripts": {
     "test": "standard",
     "build": "webpack",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "start": "node server.js",
+    "postinstall": "webpack"
   },
   "author": "David Blanchard <davidaaronblanchard@gmail.com>",
   "license": "MIT",

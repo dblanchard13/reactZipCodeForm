@@ -55,6 +55,10 @@ html {
   float: right;
 }
 
+.font-11 {
+  font-size: 11px;
+}
+
 .home-info > form {
   width: 100%;
   min-width: 300px;

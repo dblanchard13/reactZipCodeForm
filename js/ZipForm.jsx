@@ -76,7 +76,6 @@ const App = React.createClass({
     let cityAndState, containerContents
 
     if (this.state.zipLookupComplete) {
-
       cityAndState = (
 
         <div>
@@ -136,7 +135,6 @@ const App = React.createClass({
               onChange={this.handleAddress2Event}
             />
 
-
             {cityAndState}
 
             <input
@@ -152,18 +150,22 @@ const App = React.createClass({
 
             <button className='submit'>Submit</button>
 
+            <p className='float-left font-11'>
+              Please note that the city & state may take a bit longer the first time
+              you enter a zip code because the API and it's DB are hosted on the
+              cheapest Heroku tier and they get spun down if they haven't been used in a while
+            </p>
+
           </ReactCSSTransitionGroup>
         </form>
       )
     } else {
-
       containerContents = (
         <div>
           <h1 className='title'>Thanks!!</h1>
           <button className='submit' onClick={this.handleResubmit}>Resubmit</button>
         </div>
       )
-
     }
 
     return (
